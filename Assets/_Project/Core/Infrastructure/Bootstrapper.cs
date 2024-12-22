@@ -17,6 +17,6 @@ public class Bootstrapper : MonoBehaviour
     }
 
     void KeepFsnInMemory( ) =>
-        DontDestroyOnLoad( this ); //or move FSN field to ProjectContext
+        DontDestroyOnLoad( this ); //or move FSM field to ProjectContext
 }
 }
