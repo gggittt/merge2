@@ -14,6 +14,7 @@ public class GameplayInstaller : MonoInstaller
     [SerializeField] GameData _gameData;
     [SerializeField] CellCreator _cellCreator;
     [SerializeField] ItemModel _itemModelPrefab;
+    [SerializeField] ItemShapesDrawer _itemShapesDrawer;
 
 
     public override void InstallBindings( )
@@ -33,11 +34,12 @@ public class GameplayInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<ItemFactory>()
            .AsSingle()
-           // .WithArguments( _itemShapesDrawer )
+           .WithArguments( _itemShapesDrawer )
            ;
 
         Container.BindInterfacesAndSelfAsSingleFromInstance( _gameData );
         Container.BindInterfacesAndSelfAsSingleFromInstance( _cellCreator );
+        Container.BindInterfacesAndSelfAsSingleFromInstance( _itemShapesDrawer );
 
     }
 }

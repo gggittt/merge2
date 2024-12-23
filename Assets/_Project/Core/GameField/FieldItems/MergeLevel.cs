@@ -10,10 +10,11 @@ public class MergeLevel
 
     public int Get( ) => _value;
 
-    public int Set( int value )
+    public void Set( int value )
     {
         OnValueChanged?.Invoke( value );
-        return _value = value;
+        //add particles, congratulate player if he first reach a new level...
+        _value = value;
     }
 }
 }

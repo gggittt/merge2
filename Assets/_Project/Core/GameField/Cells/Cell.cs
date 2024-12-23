@@ -13,7 +13,7 @@ public class Cell : MonoBehaviour
 
     [field: SerializeField] public bool IsItemFrozen { get; private set; }
 
-    public ItemModel HoldedItem { get; set; }
+    [field: SerializeField] public ItemModel HoldedItem { get; set; }
     public bool HasItem => HoldedItem != null;
     public bool AvailableForReceiveItem => HasItem == false;
 
@@ -24,6 +24,5 @@ public class Cell : MonoBehaviour
     }
 
     public override string ToString( ) => $"{GetType().Name}, {_localCoord}";
-
 }
 }

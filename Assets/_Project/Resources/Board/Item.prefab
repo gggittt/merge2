@@ -117,8 +117,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970fb125794a4c388f76a10da6435346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextLevelItem: {fileID: 0}
   <Shape>k__BackingField: 0
+  _movement: {fileID: 4609140528848513532}
+  _nextLevelItem: {fileID: 0}
+  Cell: {fileID: 0}
 --- !u!114 &1473594642442329931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +215,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasForGo
       objectReference: {fileID: 0}
+    - target: {fileID: 1363988681805896417, guid: 9dd291b5176bde244a78e2ac5bba8f43, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1363988681805896417, guid: 9dd291b5176bde244a78e2ac5bba8f43, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2031912021724682581, guid: 9dd291b5176bde244a78e2ac5bba8f43, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -252,6 +262,14 @@ PrefabInstance:
     - target: {fileID: 2031912021724682581, guid: 9dd291b5176bde244a78e2ac5bba8f43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617061144576389995, guid: 9dd291b5176bde244a78e2ac5bba8f43, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617061144576389995, guid: 9dd291b5176bde244a78e2ac5bba8f43, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4802731978014259897, guid: 9dd291b5176bde244a78e2ac5bba8f43, type: 3}
       propertyPath: m_SortingOrder

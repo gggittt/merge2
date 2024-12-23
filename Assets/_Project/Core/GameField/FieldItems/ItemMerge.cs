@@ -1,4 +1,5 @@
 ﻿using _Project.Core.GameField.Cells;
+using _Project.Extensions.UnityTypes;
 using UnityEngine;
 
 namespace _Project.Core.GameField.FieldItems
@@ -15,40 +16,64 @@ public class ItemMerge : MonoBehaviour
         _movement = GetComponent<ItemMovement>();
     }
 
-    public void HandleDragTo( Cell draggedTo, Vector3 originalWorldPosition )
+    public void HandleDragTo( Cell target, Vector3 originalWorldPosition )
     {
-        if ( draggedTo == null )
+        if ( target == null )
         {
             Debug.Log( $"<color=orange> no cell </color>" );
             RevertDragMove( originalWorldPosition );
         }
-        else if ( draggedTo.HasItem && draggedTo.HoldedItem.CanBeMergedWith( _model ) )
+        else if ( _model.Cell == target )
         {
-            Debug.Log( $"<color=green> {draggedTo} </color>, merge" );
-
-            // merge
+            Debug.Log( $"<color=orange> {target} </color>, same cell" );
+            RevertDragMove( originalWorldPosition );
         }
-        else if ( draggedTo.IsItemFrozen )
+        else if ( target.HasItem && target.HoldedItem.CanBeMergedWith( _model ) )
         {
-            Debug.Log( $"<color=orange> {draggedTo} </color>, frozen" );
+            Debug.Log( $"<color=green> {target} </color>, merge" );
+
+            MergeThisToItemIn( target );
+        }
+        else if ( target.IsItemFrozen )
+        {
+            Debug.Log( $"<color=orange> {target} </color>, frozen" );
 
             RevertDragMove( originalWorldPosition );
-            //add effects for user understand that cell is frozen: shake \ message
+            //add effects for user understand that cell is frozen: shake \ UI message
         }
-        else if ( draggedTo.AvailableForReceiveItem )
+        else if ( target.AvailableForReceiveItem )
         {
-            Debug.Log( $"<color=green> {draggedTo} </color>, move to empty cell" );
+            Debug.Log( $"<color=green> {target} </color>, move to empty cell" );
 
-            _movement.SetParentAndMoveToParent( draggedTo.transform );
+            _model.PutItemInNew( target );
         }
-        else if ( draggedTo.HasItem )
+        else if ( target.HasItem )
         {
-            Debug.Log( $"<color=lime> {draggedTo} </color>, swap" );
+            Debug.Log( $"<color=lime> {target} </color>, swap" );
+
+            SwapItems( target );
         }
         else
         {
             throw new System.Exception( "not implemented" );
         }
+    }
+
+    void MergeThisToItemIn( Cell target )
+    {
+        target.HoldedItem.MergeLevel.Set( _model.Level + 1 );
+        //should be: destroy both current items, and create a new one from "ItemModel_nextLevelItem", but I will leave it like that for now
+        _model.SetCellEmpty();
+        this.DestroyGameObject();
+    }
+
+    void SwapItems( Cell target )
+    {
+        ItemModel itemInTargetCell = target.HoldedItem;
+        Cell cellWhereDragStarted = _model.Cell;
+
+        _model.PutItemIn( target );
+        itemInTargetCell.PutItemIn( cellWhereDragStarted );
     }
 
     void RevertDragMove( Vector3 originalWorldPosition )
