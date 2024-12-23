@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _Project.Extensions.Enumerable;
 
-namespace _Project.Core.GameField
+namespace _Project.Core.GameField.Shapes
 {
 public class ShapeTypes
 {

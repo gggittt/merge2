@@ -1,4 +1,4 @@
-using _Project.Core.GameField;
+using _Project.Core.GameField.Shapes;
 using UnityEngine;
 
 namespace _Project.Core
@@ -9,6 +9,5 @@ public class GameData : MonoBehaviour
     public Vector2Int BoardSize => new Vector2Int( BoardWidth, BoardHeight );
 
     public ShapeType ShapeTypes;
-
 }
 }

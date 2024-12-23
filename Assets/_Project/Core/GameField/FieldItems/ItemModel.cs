@@ -1,4 +1,5 @@
 ﻿using _Project.Core.GameField.Cells;
+using _Project.Core.GameField.Shapes;
 using _Project.Core.Pool;
 using UnityEngine;
 
@@ -18,7 +19,6 @@ public class ItemModel : MonoBehaviour, IReleasable
     // public Cell ParentCell { get; private set; }
 
     public ItemView View { get; private set; }
-    public ItemMovement Movement { get; private set; }
 
     public void Init( ShapeType shapeType, Vector3 position )
     {
@@ -46,8 +46,6 @@ public class ItemModel : MonoBehaviour, IReleasable
     {
         if ( !View )
             View = GetComponent<ItemView>();
-        if ( !Movement )
-            Movement = GetComponent<ItemMovement>();
     }
 
     public override string ToString( ) => GetName();

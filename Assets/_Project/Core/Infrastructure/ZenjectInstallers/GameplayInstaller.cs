@@ -1,6 +1,7 @@
 ﻿using _Project.Core.GameField;
 using _Project.Core.GameField.Cells;
 using _Project.Core.GameField.FieldItems;
+using _Project.Core.GameField.Shapes;
 using _Project.Core.Pool;
 using _Project.Extensions.Zenject;
 using UnityEngine;

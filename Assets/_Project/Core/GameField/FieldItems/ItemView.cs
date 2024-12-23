@@ -40,8 +40,6 @@ public class ItemView : MonoBehaviour
 
     public void PlayAppearAnimation( )
     {
-        // Vector3 vector3 = transform.localScale;
-        // Vector3 vector3 = new Vector2( 0.8f, 0.8f );
         transform.DOScale( 0, 0 );
         transform.DOScale( _localScaleCashed, 0.2f );
     }
