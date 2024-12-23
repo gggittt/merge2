@@ -13,6 +13,7 @@ public interface ICellGrid<TCell>
     int Height { get; }
 
     HashSet<Vector2Int> GetCoordinatesOfFilteredItems(Func<TCell, bool> filter);
+    HashSet<TCell> GetFilteredItems(Func<TCell, bool> filter);
 
     int GetIndexFromCoordinates( int x, int y );
     int GetIndexFromCoordinates( Vector2Int coordinates );

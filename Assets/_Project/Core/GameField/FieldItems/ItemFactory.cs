@@ -18,15 +18,15 @@ public class ItemFactory
         _itemShapesDrawer = itemShapesDrawer;
     }
 
-    public ItemModel CreateRandomItem( Cell cell )
+    public ItemModel CreateRandomItem( Cell at )
     {
         ItemModel itemModel = _objectsPool.Get();
         ShapeType randomShape = _shapeTypes.RandomAllowedToSpawnType;
 
-        itemModel.Init( randomShape, cell.transform.position );
-        cell.HoldedItem = itemModel;
-        itemModel.transform.parent = cell.transform;
-        itemModel.Cell = cell;
+        itemModel.Init( randomShape, at.transform.position );
+        at.Item = itemModel;
+        itemModel.transform.parent = at.transform;
+        itemModel.Cell = at;
 
         itemModel.View.PlayAppearAnimation();
 
@@ -34,6 +34,5 @@ public class ItemFactory
 
         return itemModel;
     }
-
 }
 }

@@ -15,7 +15,6 @@ public class ItemMovement : MonoBehaviour
     public void SetParentAndMoveToParent( Transform parent )
     {
         transform.SetParent( parent );
-        // transform.localPosition = Vector3.zero;
         Move( parent.position );
     }
 

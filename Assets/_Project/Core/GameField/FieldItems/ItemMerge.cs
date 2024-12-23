@@ -28,11 +28,11 @@ public class ItemMerge : MonoBehaviour
             Debug.Log( $"<color=orange> {target} </color>, same cell" );
             RevertDragMove( originalWorldPosition );
         }
-        else if ( target.HasItem && target.HoldedItem.CanBeMergedWith( _model ) )
+        else if ( target.HasItem && target.Item.CanBeMergedWith( _model ) )
         {
             Debug.Log( $"<color=green> {target} </color>, merge" );
 
-            MergeThisToItemIn( target );
+            MergeThisWithItemIn( target );
         }
         else if ( target.IsItemFrozen )
         {
@@ -59,17 +59,17 @@ public class ItemMerge : MonoBehaviour
         }
     }
 
-    void MergeThisToItemIn( Cell target )
+    void MergeThisWithItemIn( Cell target )
     {
-        target.HoldedItem.MergeLevel.Set( _model.Level + 1 );
+        target.Item.MergeLevel.Set( _model.Level + 1 );
         //should be: destroy both current items, and create a new one from "ItemModel_nextLevelItem", but I will leave it like that for now
         _model.SetCellEmpty();
-        this.DestroyGameObject();
+        _model.Release();
     }
 
     void SwapItems( Cell target )
     {
-        ItemModel itemInTargetCell = target.HoldedItem;
+        ItemModel itemInTargetCell = target.Item;
         Cell cellWhereDragStarted = _model.Cell;
 
         _model.PutItemIn( target );

@@ -11,13 +11,25 @@ public class ItemModel : MonoBehaviour, IReleasable
 {
     [field: SerializeField] public ShapeType Shape { get; private set; }
     [SerializeField] ItemMovement _movement;
-    [SerializeField] ItemModel _nextLevelItem;
+    [SerializeField] MergeLevel _mergeLevel = new MergeLevel();
+    public MergeLevel MergeLevel => _mergeLevel;
 
-    public MergeLevel MergeLevel { get; } = new MergeLevel();
     public int Level => MergeLevel.Get();
 
-    public bool CanBeMergedWith( ItemModel other ) => other && HasNextLevel && HasSameLevel( other ) && HasSameShape( other );
-    public bool HasNextLevel => true; //_nextLevelItem != null; //mock
+    public bool CanBeMergedWith( ItemModel other )
+    {
+        bool hasSameLevelAndShape = other && HasSameLevel( other ) && HasSameShape( other );
+
+        if ( hasSameLevelAndShape && HasNextLevel )
+            return true;
+
+        if ( hasSameLevelAndShape && HasNextLevel == false && other.HasNextLevel == false )
+            Debug.Log( $"<color=yellow> bingo! Identical, both max level. Swap, no merge </color>" );
+
+        return false;
+    }
+
+    public bool HasNextLevel => MergeLevel.IsMaxLevel == false;
     public bool HasSameShape( ItemModel other ) => Shape.ContainsAny( other.Shape );
     public bool HasSameLevel( ItemModel other ) => Level == other.Level;
 
@@ -52,8 +64,11 @@ public class ItemModel : MonoBehaviour, IReleasable
 
     public override string ToString( ) => $"{GetType().Name}, {Shape}";
 
-    void IReleasable.Release( )
+    public void Release( )
     {
+        _mergeLevel = new MergeLevel();
+        Cell = null;
+
         View.PlayDestroyAnimation( OnAnimationFinish );
 
         void OnAnimationFinish( )
@@ -68,12 +83,12 @@ public class ItemModel : MonoBehaviour, IReleasable
         _movement.SetParentAndMoveToParent( cell.transform );
 
         Cell = cell;
-        cell.HoldedItem = this;
+        cell.Item = this;
     }
 
     public void SetCellEmpty( )
     {
-        Cell.HoldedItem = null;
+        Cell.Item = null;
     }
 
     public void PutItemInNew( Cell cell )
@@ -82,7 +97,7 @@ public class ItemModel : MonoBehaviour, IReleasable
         SetCellEmpty();
 
         Cell = cell;
-        cell.HoldedItem = this;
+        cell.Item = this;
     }
 }
 

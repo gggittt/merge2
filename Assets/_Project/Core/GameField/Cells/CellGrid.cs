@@ -39,6 +39,23 @@ public class CellGrid : ICellGrid
         return result;
     }
 
+    public HashSet<Cell> GetFilteredItems( Func<Cell, bool> filterForEachItem )
+    {
+        var result = new HashSet<Cell>();
+
+        for ( int x = 0; x < Width; x++ )
+        for ( int y = 0; y < Height; y++ )
+        {
+            Cell cell = _cells[ GetIndexFromCoordinates( x, y ) ];
+            if ( filterForEachItem( cell ) )
+            {
+                result.Add( cell );
+            }
+        }
+
+        return result;
+    }
+
     public int GetIndexFromCoordinates( int x, int y ) =>
         y * Width + x;
 
