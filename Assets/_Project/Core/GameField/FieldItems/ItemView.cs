@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using _Project.Core.UI;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Project.Core.GameField.FieldItems
@@ -6,10 +7,17 @@ namespace _Project.Core.GameField.FieldItems
 [RequireComponent( typeof( SpriteRenderer ) )]
 public class ItemView : MonoBehaviour
 {
+    [SerializeField] CanvasForGo _canvasForGo;
     [SerializeField] float _disappearAnimationDuration = 0.3f;
     Vector3 _localScaleCashed;
 
     public SpriteRenderer SpriteRenderer { get; private set; }
+
+    public void SetMergeLevel( int value )
+    {
+        _canvasForGo.Set( value );
+        // SpriteRenderer.color = new Color(value, value, value);
+    }
 
     void Awake( )
     {

@@ -5,18 +5,22 @@ using UnityEngine;
 
 namespace _Project.Core.GameField.FieldItems
 {
+
 [RequireComponent( typeof( ItemView ) )]
 public class ItemModel : MonoBehaviour, IReleasable
 {
+    [SerializeField] ItemModel _nextLevelItem;
     [field: SerializeField] public ShapeType Shape { get; private set; }
-    [field: SerializeField] public int Level { get; private set; }
 
-    public bool CanBeMatchedWith( ItemModel other ) => other && HasSameFlag( other );
-    public bool HasSameFlag( ItemModel other ) => Shape.ContainsAny( other.Shape );
+    public int Level => MergeLevel.Get();
+    // [field: SerializeField, Min( 1 )] public int Level { get; private set; } = 1;
 
-    public bool IsSameShape( ItemModel other ) => other && Shape == other.Shape;
+    [SerializeField] public MergeLevel MergeLevel;
 
-    // public Cell ParentCell { get; private set; }
+    public bool CanBeMergedWith( ItemModel other ) => other && HasNextLevel && HasSameLevel( other ) && HasSameShape( other );
+    public bool HasNextLevel => _nextLevelItem != null;
+    public bool HasSameShape( ItemModel other ) => Shape.ContainsAny( other.Shape );
+    public bool HasSameLevel( ItemModel other ) => Level == other.Level;
 
     public ItemView View { get; private set; }
 
@@ -27,14 +31,9 @@ public class ItemModel : MonoBehaviour, IReleasable
 
         transform.position = position;
 
-        name = GetName();
-    }
+        MergeLevel.OnValueChanged += View.SetMergeLevel;
 
-    public void SetParentAndMoveToParent( Cell parent )
-    {
-        // ParentCell = parent;
-        transform.SetParent( parent.transform );
-        transform.localPosition = Vector3.zero;
+        name = ToString();
     }
 
     void OnValidate( )
@@ -48,8 +47,7 @@ public class ItemModel : MonoBehaviour, IReleasable
             View = GetComponent<ItemView>();
     }
 
-    public override string ToString( ) => GetName();
-    string GetName( ) => $"{GetType().Name}, {Shape}";
+    public override string ToString( ) => $"{GetType().Name}, {Shape}";
 
     void IReleasable.Release( )
     {

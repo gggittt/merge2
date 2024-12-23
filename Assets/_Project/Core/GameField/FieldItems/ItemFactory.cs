@@ -16,7 +16,7 @@ public class ItemFactory
         _shapeTypes = shapeTypes;
     }
 
-    public ItemModel CreateItem( Cell cell )
+    public ItemModel CreateRandomItem( Cell cell )
     {
         ItemModel itemModel = _objectsPool.Get();
         ShapeType randomShape = _shapeTypes.RandomAllowedToSpawnType;

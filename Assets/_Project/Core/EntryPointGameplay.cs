@@ -15,10 +15,15 @@ public class EntryPointGameplay : MonoBehaviour
     {
         _cellCreator.CreateBoard();
 
-        _itemFactory.CreateItem( _cellGrid.TryGet( 4 ) );
-        _itemFactory.CreateItem( _cellGrid.TryGet( 8 ) );
-        _itemFactory.CreateItem( _cellGrid.TryGet( 15 ) );
-        _itemFactory.CreateItem( _cellGrid.TryGet( 16 ) );
+        _itemFactory.CreateRandomItem( _cellGrid.TryGet( 4 ) );
+        _itemFactory.CreateRandomItem( _cellGrid.TryGet( 8 ) );
+        _itemFactory.CreateRandomItem( _cellGrid.TryGet( 15 ) );
+        _itemFactory.CreateRandomItem( _cellGrid.TryGet( 16 ) );
+        _itemFactory.CreateRandomItem( _cellGrid.TryGet( 23 ) );
+        _itemFactory.CreateRandomItem( _cellGrid.TryGet( 42 ) );
+        _itemFactory.CreateRandomItem( _cellGrid.TryGet( 50 ) );
+        _itemFactory.CreateRandomItem( _cellGrid.TryGet( 51 ) );
+        _itemFactory.CreateRandomItem( _cellGrid.TryGet( 52 ) );
     }
 
 }
