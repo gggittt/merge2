@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace _Project.Core.GameField.FieldItems
 {
-
 [RequireComponent( typeof( ItemView ), typeof( ItemMovement ) )]
 public class ItemModel : MonoBehaviour, IReleasable
 {
@@ -24,7 +23,7 @@ public class ItemModel : MonoBehaviour, IReleasable
             return true;
 
         if ( hasSameLevelAndShape && HasNextLevel == false && other.HasNextLevel == false )
-            Debug.Log( $"<color=yellow> bingo! Identical, both max level. Swap, no merge </color>" );
+            Debug.Log( $"<color=yellow> bingo! Identical, both max level. Cant be merged </color>" );
 
         return false;
     }
