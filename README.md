@@ -79,6 +79,8 @@ https://github.com/user-attachments/assets/32bcb42c-1c1c-42c6-bdce-d57590c6ab84
 
     
 ## My codestyle
+* Подстроюсь под стиль кода команды. 
+
 Для фикса codestyle всего проекта под себя, в Rider:
   1. `Ctrl+e, Ctrl+c` (Reformat and Cleanup Code)
   2. Настроить свой стиль (Select Profile)
@@ -88,7 +90,7 @@ https://github.com/user-attachments/assets/32bcb42c-1c1c-42c6-bdce-d57590c6ab84
   4. Select Scope -> Whole Solution
   5. Run
 
-- (Это описание стиля в текущем проекте. Подстроюсь под codestyle будущей команды, перезапишу свои привычки)
+###  Описание стиля в текущем проекте. (Подстроюсь под codestyle будущей команды, перезапишу свои привычки)
 - Не делаю отступ для namespace. Будет проще перейти на фичу C# 10 "File scoped namespaces", когда нет отступа для types.  
   - ![image](https://github.com/user-attachments/assets/e503d46c-a8ec-4009-8409-00aec11e9a11)
   - Настраивается в Rider: убрать галочку здесь:
